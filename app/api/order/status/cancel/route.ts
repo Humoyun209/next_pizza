@@ -1,4 +1,5 @@
 import { prisma } from '@/prisma/prisma.client'
+import { BASE_URL } from '@/shared/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const GET = async (req: NextRequest) => {
@@ -16,7 +17,7 @@ export const GET = async (req: NextRequest) => {
                 status: 'CANCELED',
             },
         })
-        return NextResponse.redirect(process.env.BASE_URL + '/?orderStatus=paid')
+        return NextResponse.redirect(BASE_URL + '/?orderStatus=paid')
     } catch (error) {
         return NextResponse.json({ message: 'Order Not Found' }, { status: 400 })
     }

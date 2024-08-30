@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/ui/button'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { BASE_URL } from '@/shared/lib/fetcher'
+import { BASE_API } from '@/shared/lib/utils'
 import toast from 'react-hot-toast'
 import ButtonWithLoading from '@/shared/components/common/ButtonWithLoading'
 
@@ -37,7 +37,7 @@ const ChangePassword = () => {
     })
     const handleSubmit = async (data: TChangePassword) => {
         setLoading(true)
-        const res = await fetch(`${BASE_URL}/users/change-password`, {
+        const res = await fetch(`${BASE_API}/users/change-password`, {
             body: JSON.stringify(data),
             method: 'POST',
             headers: {

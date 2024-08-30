@@ -1,3 +1,4 @@
+import { BASE_API } from '@/shared/lib/utils'
 import ProfileCard from '@/shared/views/profile/ProfileCard'
 import { getServerSession } from 'next-auth'
 import { headers } from 'next/headers'
@@ -12,7 +13,7 @@ const ProfilePage = async (props: Props) => {
     if (!session?.user) {
         return redirect('/forbidden')
     }
-    const data = await fetch(process.env.BASE_API + '/users/current', {
+    const data = await fetch(BASE_API + '/users/current', {
         method: 'GET',
         headers: headers(),
     })

@@ -2,9 +2,9 @@ import React from 'react'
 import IngredientsSkeleton from './IngredientsSkeleton'
 import useSWR from 'swr'
 import { Ingredient } from '@prisma/client'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import Checkbox from '@/shared/components/ui/checkbox'
-import { cn } from '@/shared/lib/utils'
+import { BASE_API, cn } from '@/shared/lib/utils'
 import toast from 'react-hot-toast'
 
 type Props = {
@@ -26,7 +26,7 @@ const IngredientCheckbox = ({
         data: ingredients = [],
         isLoading,
         error,
-    } = useSWR<Ingredient[]>(`${BASE_URL}/ingredients`, {
+    } = useSWR<Ingredient[]>(`${BASE_API}/ingredients`, {
         fetcher: fetcher,
     })
 

@@ -7,6 +7,7 @@ import { cartService } from '../../cart/cart.service'
 import { getSumAllProducts } from '@/shared/views/home/cart/utils'
 import Stripe from 'stripe'
 import { getPriceId } from '@/shared/lib/backend/stripe'
+import { BASE_URL } from '@/shared/lib/utils'
 
 export const POST = async (req: NextRequest) => {
     const DELIVERY_COST = 120
@@ -46,8 +47,8 @@ export const POST = async (req: NextRequest) => {
                 },
             ],
             mode: 'payment',
-            success_url: `${process.env.BASE_URL}/api/order/status/success?orderId=${order.id}`,
-            cancel_url: `${process.env.BASE_URL}/api/order/status/cancel?orderId=${order.id}`,
+            success_url: `${BASE_URL}/api/order/status/success?orderId=${order.id}`,
+            cancel_url: `${BASE_URL}/api/order/status/cancel?orderId=${order.id}`,
             metadata: {
                 userId: 1,
                 priceId,

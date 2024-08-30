@@ -11,12 +11,12 @@ import { Button } from '@/shared/components/ui/button'
 import { ArrowRight, ShoppingCart } from 'lucide-react'
 import CartItem from './CartItem'
 import useSWR from 'swr'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import { cartService } from '@/app/api/cart/cart.service'
 import { getAllProductLength, getSumAllProducts } from './utils'
 import ButtonWithLoading from '@/shared/components/common/ButtonWithLoading'
 import EmptyBasket from './EmptyBasket'
-import { cn } from '@/shared/lib/utils'
+import { BASE_API, cn } from '@/shared/lib/utils'
 import CartDrawerSkeleton from './CartDrawerSkeleton'
 import { useRouter } from 'next/navigation'
 
@@ -24,7 +24,7 @@ export type TCart = Awaited<ReturnType<typeof cartService.getCart>>
 
 const CartDrawer = () => {
     const [loading, setLoading] = useState(false)
-    const { data, isLoading, isValidating } = useSWR<TCart, Error>(`${BASE_URL}/cart`, {
+    const { data, isLoading, isValidating } = useSWR<TCart, Error>(`${BASE_API}/cart`, {
         fetcher,
     })
     const router = useRouter()

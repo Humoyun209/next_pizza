@@ -1,6 +1,6 @@
 'use client'
 
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import { useEffect, useState } from 'react'
 import useSWR, { mutate } from 'swr'
 import toast from 'react-hot-toast'
@@ -13,6 +13,7 @@ import { productService } from '@/app/api/products/product.service'
 import { useRouter } from 'next/navigation'
 import ProductModalDialog from '.'
 import ProductModalSkeleton from './ProductModalSkeleton'
+import { BASE_API } from '@/shared/lib/utils'
 
 type Props = {
     id: string
@@ -30,7 +31,7 @@ const ContentModal = ({ id }: Props) => {
         data: product,
         isLoading,
         error,
-    } = useSWR<TProduct, Error>(`${BASE_URL}/products/${id}`, { fetcher })
+    } = useSWR<TProduct, Error>(`${BASE_API}/products/${id}`, { fetcher })
 
     useEffect(() => {
         setIngredientIds([])
@@ -39,7 +40,7 @@ const ContentModal = ({ id }: Props) => {
 
     const addToBasket = async () => {
         setLoading(true)
-        const result = await fetch(`${BASE_URL}/cart/add`, {
+        const result = await fetch(`${BASE_API}/cart/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,7 +97,7 @@ const ContentModal = ({ id }: Props) => {
                     onClick={async () => {
                         const result = await addToBasket()
                         if (result) {
-                            mutate(`${BASE_URL}/cart`)
+                            mutate(`${BASE_API}/cart`)
                             toast.success('Товар добавлен в корзину')
                             setLoading(false)
                             router.back()

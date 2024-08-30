@@ -1,21 +1,10 @@
 'use client'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
 import React, { useEffect, useState } from 'react'
-import useSWR from 'swr'
-import Checkbox from '@/shared/components/ui/checkbox'
 import { useProductFilter } from '@/store/productFilters'
-import { cn } from '@/shared/lib/utils'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import IngredientsSkeleton from './IngredientsSkeleton'
 import IngredientCheckbox from './IngredientCheckbox'
 
-type Props = {}
-interface Ingredient {
-    id: number
-    name: string
-}
-
-const CheckboxGroup = (props: Props) => {
+const CheckboxGroup = () => {
     const searchParams = useSearchParams().toString()
     const params = new URLSearchParams(searchParams.toString())
     const router = useRouter()

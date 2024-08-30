@@ -4,9 +4,10 @@ import { Minus, Plus, X } from 'lucide-react'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { sumProductWithIngredients } from '@/shared/views/home/cart/utils'
 import { useSWRConfig } from 'swr'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import toast from 'react-hot-toast'
 import { CartItemSkeleton } from './CartItemSkeleton'
+import { BASE_API } from '@/shared/lib/utils'
 
 type Props = {
     item: {
@@ -44,16 +45,16 @@ const CartItem = ({ item, loading, setLoading }: Props) => {
         let result: any = ''
         if (type == 'inc' && item.count < 5) {
             result = await mutate(
-                `${BASE_URL}/cart`,
-                fetcher(`${BASE_URL}/cart/change`, {
+                `${BASE_API}/cart`,
+                fetcher(`${BASE_API}/cart/change`, {
                     method: 'PUT',
                     body: JSON.stringify({ id: item.id, count: item.count + 1 }),
                 }),
             )
         } else if (type == 'dec' && item.count > 1) {
             const result = await mutate<ICartItem>(
-                `${BASE_URL}/cart`,
-                fetcher(`${BASE_URL}/cart/change`, {
+                `${BASE_API}/cart`,
+                fetcher(`${BASE_API}/cart/change`, {
                     method: 'PUT',
                     body: JSON.stringify({ id: item.id, count: item.count - 1 }),
                 }),
@@ -65,13 +66,13 @@ const CartItem = ({ item, loading, setLoading }: Props) => {
     const deleteCartItem = async () => {
         setLoading(true)
         const result = await mutate<{ ok: boolean }>(
-            `${BASE_URL}/cart`,
-            fetcher(`${BASE_URL}/cart/remove/${item.id}`, {
+            `${BASE_API}/cart`,
+            fetcher(`${BASE_API}/cart/remove/${item.id}`, {
                 method: 'DELETE',
             }),
         )
         if (result?.ok) {
-            mutate(`${BASE_URL}/cart`)
+            mutate(`${BASE_API}/cart`)
             toast.success('Товар удален из корзины')
         } else {
             toast.error('Произошла ошибка при удалении')

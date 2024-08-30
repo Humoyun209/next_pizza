@@ -1,11 +1,11 @@
 'use client'
-import { cn } from '@/shared/lib/utils'
+import { BASE_API, cn } from '@/shared/lib/utils'
 import { useCategoryId } from '@/store/category'
 import Container from '@/shared/components/ui/container'
 import SortedPopover from './SortedPopover'
 import { usePathname, useRouter } from 'next/navigation'
 import useSWR from 'swr'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import { Skeleton } from '@/shared/components/ui/skeleton'
 import toast from 'react-hot-toast'
 
@@ -30,7 +30,7 @@ const HeaderOfCategories = ({ className }: Props) => {
     }
 
     const { data, isLoading, error } = useSWR<{ categories: ICategory[] }, Error>(
-        BASE_URL + '/categories',
+        BASE_API + '/categories',
         { fetcher },
     )
 

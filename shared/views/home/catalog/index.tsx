@@ -5,9 +5,10 @@ import ListOfProducts from './ListOfProducts'
 import { productService } from '@/app/api/products/product.service'
 import { useProductFilter } from '@/store/productFilters'
 import useSWR from 'swr'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import toast from 'react-hot-toast'
 import CatalogSkeleton from './CatalogSkeleton'
+import { BASE_API } from '@/shared/lib/utils'
 
 type Props = {}
 type TCatalogProducts = Awaited<ReturnType<typeof productService.getProducts>>
@@ -15,11 +16,11 @@ type TCatalogProducts = Awaited<ReturnType<typeof productService.getProducts>>
 const CatalogOfProducts = (props: Props) => {
     const { setLoading, isSubmitted, minPrice, maxPrice, ingredients, setIsSubmitted } =
         useProductFilter()
-    const [productUrl, setProductUrl] = useState<string>(`${BASE_URL}/products`)
+    const [productUrl, setProductUrl] = useState<string>(`${BASE_API}/products`)
 
     useEffect(() => {
         setProductUrl(
-            `${BASE_URL}/products?ingredients=${ingredients.join(
+            `${BASE_API}/products?ingredients=${ingredients.join(
                 '|',
             )}&minPrice=${minPrice}&maxPrice=${maxPrice}`,
         )

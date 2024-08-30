@@ -1,13 +1,11 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import AccountInput from './AccountInput'
-import { Button } from '@/shared/components/ui/button'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import ButtonWithLoading from '@/shared/components/common/ButtonWithLoading'
-import { BASE_URL } from '@/shared/lib/fetcher'
 import { userService } from '@/app/api/users/users.service'
-import { headers } from 'next/headers'
+import { BASE_API } from '@/shared/lib/utils'
 
 type Props = {}
 type TCurrentUser = Awaited<ReturnType<typeof userService.getUserById>>
@@ -17,7 +15,7 @@ const ChangeForm = (props: Props) => {
     const ref = useRef<HTMLInputElement>(null)
     const [currentUser, setCurrentUser] = useState<TCurrentUser | null>(null)
     useEffect(() => {
-        fetch(BASE_URL + '/users/current')
+        fetch(BASE_API + '/users/current')
             .then(res => res.json())
             .then(data => {
                 setCurrentUser(data)
@@ -35,7 +33,7 @@ const ChangeForm = (props: Props) => {
             const formData = new FormData()
             formData.append('avatar', uploadImage ? uploadImage : '')
             formData.append('username', username)
-            const response = await fetch(BASE_URL + '/users/change', {
+            const response = await fetch(BASE_API + '/users/change', {
                 method: 'POST',
                 body: formData,
             })

@@ -3,9 +3,9 @@ import { Search, X } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useClickAway, useDebounce } from 'react-use'
 import SearchItem from './SearchItem'
-import { cn } from '@/shared/lib/utils'
+import { BASE_API, cn } from '@/shared/lib/utils'
 import useSWR from 'swr'
-import { BASE_URL, fetcher } from '@/shared/lib/fetcher'
+import { fetcher } from '@/shared/lib/fetcher'
 import { productService } from '@/app/api/products/product.service'
 
 type Props = {
@@ -33,7 +33,7 @@ const SearchHeader = (props: Props) => {
         error,
         isLoading,
     } = useSWR<Awaited<ReturnType<typeof productService.searchProducts>>, Error>(
-        `${BASE_URL}/products/search?query=${searchValue}`,
+        `${BASE_API}/products/search?query=${searchValue}`,
         { fetcher: fetcher, revalidateIfStale: true },
     )
 

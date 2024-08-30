@@ -1,4 +1,5 @@
 import { prisma } from '@/prisma/prisma.client'
+import { BASE_URL } from '@/shared/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
 type Props = {
     params: {
@@ -15,12 +16,12 @@ export const GET = async (req: NextRequest, { params: { code } }: Props) => {
 
     if (!verifyCode) {
         console.log('Not found....')
-        return NextResponse.redirect(process.env.BASE_URL + '/not-found')
+        return NextResponse.redirect(BASE_URL + '/not-found')
     }
     const now = new Date()
     if (verifyCode.expiredAt < now) {
         console.log('Expired....')
-        return NextResponse.redirect(process.env.BASE_URL + '/forbidden')
+        return NextResponse.redirect(BASE_URL + '/forbidden')
     }
 
     const user = await prisma.user.update({
@@ -39,5 +40,5 @@ export const GET = async (req: NextRequest, { params: { code } }: Props) => {
             },
         })
     }
-    return NextResponse.redirect(process.env.BASE_URL + '/')
+    return NextResponse.redirect(BASE_URL + '/')
 }

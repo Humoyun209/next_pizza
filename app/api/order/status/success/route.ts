@@ -1,4 +1,5 @@
 import { prisma } from '@/prisma/prisma.client'
+import { BASE_URL } from '@/shared/lib/utils'
 import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -17,7 +18,7 @@ export const GET = async (req: NextRequest) => {
                 status: 'PAID',
             },
         })
-        return NextResponse.redirect(process.env.BASE_URL + '/?orderStatus=paid')
+        return NextResponse.redirect(BASE_URL + '/?orderStatus=paid')
     } catch (error) {
         console.log(error)
         return NextResponse.json({ message: 'Order Not Found 567' }, { status: 400 })
