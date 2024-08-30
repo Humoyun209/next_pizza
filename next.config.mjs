@@ -4,8 +4,7 @@ const nextConfig = {
         return [
             {
                 source: '/api/:path*',
-                destination:
-                    'https://next-pizza-2pab2r3fv-humoyun209s-projects.vercel.app/api/:path*',
+                destination: 'https://next-pizza-navy.vercel.app/api/:path*',
             },
         ]
     },
