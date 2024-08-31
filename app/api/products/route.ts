@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest) => {
 
     const filters: Record<string, any> = {
         minPrice: minPrice || 0,
-        maxPrice: maxPrice || 99999999999999,
+        maxPrice: maxPrice || 9999,
     }
 
     if (checkNumberArray(sIngredients, '|').length > 0) {
