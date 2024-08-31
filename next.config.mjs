@@ -18,7 +18,7 @@ const nextConfig = {
                     {
                         key: 'Access-Control-Allow-Methods',
                         value: 'GET, POST, PUT, DELETE, OPTIONS',
-                    }, // разрешить все методы HTTP
+                    },
                     { key: 'Access-Control-Allow-Headers', value: '*' },
                 ],
             },

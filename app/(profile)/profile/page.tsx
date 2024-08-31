@@ -9,13 +9,13 @@ type Props = {}
 
 const ProfilePage = async (props: Props) => {
     const session = await getServerSession()
-    console.log('session in Page', session)
     if (!session?.user) {
         return redirect('/forbidden')
     }
+    const headers_ = new Headers(headers())
     const data = await fetch(BASE_API + '/users/current', {
         method: 'GET',
-        headers: headers(),
+        headers: headers_,
     })
     const user = await data.json()
 
