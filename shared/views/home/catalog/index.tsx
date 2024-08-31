@@ -10,10 +10,9 @@ import toast from 'react-hot-toast'
 import CatalogSkeleton from './CatalogSkeleton'
 import { BASE_API } from '@/shared/lib/utils'
 
-type Props = {}
 type TCatalogProducts = Awaited<ReturnType<typeof productService.getProducts>>
 
-const CatalogOfProducts = (props: Props) => {
+const CatalogOfProducts = () => {
     const { setLoading, isSubmitted, minPrice, maxPrice, ingredients, setIsSubmitted } =
         useProductFilter()
     const [productUrl, setProductUrl] = useState<string>(`${BASE_API}/products`)
