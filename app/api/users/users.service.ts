@@ -1,6 +1,6 @@
 import { User } from '@prisma/client'
 import { prisma } from '@/prisma/prisma.client'
-import argon2 from 'argon2'
+import { hash } from 'bcrypt'
 
 type UserWithoutDate = Omit<User, 'createdAt' | 'updatedAt'>
 class UserService {
@@ -8,7 +8,7 @@ class UserService {
         const newUser = await prisma.user.create({
             data: {
                 ...data,
-                password: await argon2.hash(data.password),
+                password: await hash(data.password, 10),
             },
             select: {
                 username: true,
