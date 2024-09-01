@@ -6,7 +6,6 @@ import { prisma } from '@/prisma/prisma.client'
 import { compare, hash } from 'bcrypt'
 
 export const authOptions: NextAuthOptions = {
-    secret: process.env.SECRET_KEY,
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_ID as string,
