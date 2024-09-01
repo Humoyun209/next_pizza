@@ -17,9 +17,9 @@ const ChangeForm = (props: Props) => {
     useEffect(() => {
         fetch(BASE_API + '/users/current')
             .then(res => res.json())
-            .then((data: { data: TCurrentUser }) => {
-                setCurrentUser(data.data)
-                setUsername(data.data?.username || '')
+            .then((data: TCurrentUser) => {
+                setCurrentUser(data)
+                setUsername(data?.username || '')
             })
     }, [])
     const [username, setUsername] = useState(session.data?.user?.username || '')

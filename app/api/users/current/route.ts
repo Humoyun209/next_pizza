@@ -9,5 +9,5 @@ export const GET = async (req: NextRequest) => {
         return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
     }
     const user = await userService.getUserById(session.user.id)
-    return NextResponse.json({ data: user }, { status: 200 })
+    return NextResponse.json(user, { status: 200 })
 }
