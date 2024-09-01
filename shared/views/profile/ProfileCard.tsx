@@ -9,6 +9,7 @@ import useSWR from 'swr'
 import { BASE_API } from '@/shared/lib/utils'
 import { fetcher } from '@/shared/lib/fetcher'
 import { Skeleton } from '@/shared/components/ui/skeleton'
+import { headers } from 'next/headers'
 
 moment.locale('ru')
 
@@ -20,10 +21,6 @@ const ProfileCard = () => {
         isLoading,
         error,
     } = useSWR<TUser, Error>(BASE_API + '/users/current', { fetcher })
-
-    console.log(user)
-    console.log(error)
-    console.log(error?.message)
 
     if (isLoading) {
         return (
