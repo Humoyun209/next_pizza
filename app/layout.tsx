@@ -1,11 +1,7 @@
 import type { Metadata } from 'next'
-import { Toaster } from 'react-hot-toast'
-import NextTopLoader from 'nextjs-toploader'
 import localFont from 'next/font/local'
 import './globals.css'
 import { cn } from '@/shared/lib/utils'
-import { ReactQueryClientProvider } from '@/shared/components/common/QueryClientProvider'
-import Link from 'next/link'
 import Providers from '@/shared/components/common/Providers'
 
 const nunito = localFont({
@@ -60,12 +56,10 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
     return (
-        <ReactQueryClientProvider>
-            <html lang="en">
-                <body className={cn(nunito.variable)}>
-                    <Providers>{children}</Providers>
-                </body>
-            </html>
-        </ReactQueryClientProvider>
+        <html lang="en">
+            <body className={cn(nunito.variable)}>
+                <Providers>{children}</Providers>
+            </body>
+        </html>
     )
 }
