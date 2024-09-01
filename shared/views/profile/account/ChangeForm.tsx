@@ -17,9 +17,9 @@ const ChangeForm = (props: Props) => {
     useEffect(() => {
         fetch(BASE_API + '/users/current')
             .then(res => res.json())
-            .then(data => {
-                setCurrentUser(data)
-                setUsername(data.username)
+            .then((data: { data: TCurrentUser }) => {
+                setCurrentUser(data.data)
+                setUsername(data.data?.username || '')
             })
     }, [])
     const [username, setUsername] = useState(session.data?.user?.username || '')
@@ -39,7 +39,6 @@ const ChangeForm = (props: Props) => {
             })
 
             const data = await response.json()
-            console.log(data)
             setLoading(false)
             if (response.ok) {
                 toast.success('Аккаунт успешно обновлен')

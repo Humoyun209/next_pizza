@@ -1,23 +1,21 @@
-import { Button } from '@/shared/components/ui/button'
-import { Input } from '@/shared/components/ui/input'
+import { BASE_API } from '@/shared/lib/utils'
 import ChangeForm from '@/shared/views/profile/account/ChangeForm'
 import ChangePassword from '@/shared/views/profile/account/ChangePassword'
-import { getServerSession } from 'next-auth'
 import { headers } from 'next/headers'
 import React from 'react'
 
 type Props = {}
 
 const AccountPage = async (props: Props) => {
-    const session = await getServerSession()
-    const user: any = await fetch(process.env.BASE_API + '/users/current', {
+    const headers_ = new Headers(headers())
+    const user: any = await fetch(BASE_API + '/users/current', {
         method: 'GET',
-        headers: headers(),
+        headers: headers_,
     })
     return (
         <div>
             <ChangeForm />
-            {!user.provider && <ChangePassword />}
+            {user.data && !user.data.provider && <ChangePassword />}
         </div>
     )
 }
