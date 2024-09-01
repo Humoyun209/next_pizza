@@ -25,16 +25,16 @@ const ProfileCard = () => {
         return (
             <div className="grid grid-cols-3 gap-20">
                 <div className="px-2 flex flex-col items-center gap-3">
-                    <Skeleton className="w-24 h-24 rounded-full" />
-                    <Skeleton className="h-5 w-[100px]" />
+                    <Skeleton className="w-36 h-36 rounded-full" />
                     <Skeleton className="h-5 w-[150px]" />
+                    <Skeleton className="h-5 w-[200px]" />
                 </div>
                 <div className="col-span-2 flex flex-col justify-between gap-6">
                     <Skeleton className="h-8 w-[300px]" />
                     <div className="flex flex-col gap-8">
+                        <Skeleton className="h-6 w-[500px]" />
+                        <Skeleton className="h-6 w-[450px]" />
                         <Skeleton className="h-6 w-[400px]" />
-                        <Skeleton className="h-6 w-[350px]" />
-                        <Skeleton className="h-6 w-[380px]" />
                     </div>
                 </div>
             </div>
