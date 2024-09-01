@@ -24,8 +24,8 @@ const ProfileCard = () => {
     if (isLoading) {
         return (
             <div className="grid grid-cols-3 gap-20">
-                <div className="px-2 flex flex-col items-center">
-                    <Skeleton className="w-24 h-24" />
+                <div className="px-2 flex flex-col items-center gap-3">
+                    <Skeleton className="w-24 h-24 rounded-full" />
                     <Skeleton className="h-5 w-[100px]" />
                     <Skeleton className="h-5 w-[150px]" />
                 </div>
