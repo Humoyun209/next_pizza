@@ -21,6 +21,10 @@ const ProfileCard = () => {
         error,
     } = useSWR<TUser, Error>(BASE_API + '/users/current', { fetcher })
 
+    console.log(user)
+    console.log(error)
+    console.log(error?.message)
+
     if (isLoading) {
         return (
             <div className="grid grid-cols-3 gap-20">
